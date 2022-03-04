@@ -1,0 +1,43 @@
+baseURL = 'https://blog.devoc.ninja'
+languageCode = 'en-us'
+title = 'devocのブログ'
+theme = "m10c"
+paginate = 8
+staticDir = ["static/images"]
+
+[menu]
+    [[menu.main]]
+        identifier = "home"
+        name = "ホーム"
+        url = "/"
+        weight = 1
+    [[menu.main]]
+        identifier = "tags"
+        name = "タグ"
+        url = "/tags/"
+        weight = 2
+
+[params]
+    author = "devoc"
+    avatar = "myicon-hooded.PNG"
+    description = "エンジニアですが，技術ブログだけでなく，趣味やお気持ち表明も投稿していきます"
+    favicon = "myicon-hooded.PNG"
+    
+    [[params.social]]
+        icon = "twitter"
+        name = "Twitter"
+        url = "https://twitter.com/devoc_"
+    [[params.social]]
+        icon = "github"
+        name = "Github"
+        url = "https://github.com/devoc09"
+    [[params.social]]
+        icon = "site"
+        name = "devoc's site"
+        url = "https://devoc.ninja"
+[params.style]
+    darkestColor = "#262829"
+    darkColor = "#1b1d1e"
+    lightColor = "#afbac4"
+    lightestColor = "#f8f8f2"
+    primaryColor = "#e48c22"
