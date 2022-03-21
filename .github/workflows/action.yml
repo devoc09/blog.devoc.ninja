@@ -9,7 +9,7 @@ on:
     branches:
       - main
 env:
-  IMAGE_NAME: homepage2
+  IMAGE_NAME: blog.devoc.ninja
 
 jobs:
   # Push image to GitHub Packages.
