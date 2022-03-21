@@ -1,0 +1,4 @@
+localhost:9000
+
+root * /blog/public
+file_server
