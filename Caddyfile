@@ -1,4 +1,4 @@
-localhost:9000
+devoc.local:9000
 
 root * /blog/public
 file_server
