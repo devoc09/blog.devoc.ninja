@@ -22,6 +22,7 @@ staticDir = ["static/images"]
     avatar = "myicon-hooded.PNG"
     description = "エンジニアですが，技術ブログだけでなく，趣味やお気持ち表明も投稿していきます"
     favicon = "myicon-hooded.PNG"
+    images = "myicon-hooded.PNG"
     
     [[params.social]]
         icon = "twitter"
