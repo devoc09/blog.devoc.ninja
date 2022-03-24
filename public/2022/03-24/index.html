@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>devocのブログを支える技術 with Caddy // devocのブログ</title>
+    <link rel="shortcut icon" href="myicon-hooded.PNG" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.93.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="devoc" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.1ae73dd38b0fc3b138b2173c3ee7a822253acfd664213897217fa45afc6e7068.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="devocのブログを支える技術 with Caddy"/>
+<meta name="twitter:description" content="こんにちは．入社してからあるであろう健康診断のために付け焼き刃の努力で運動しているkumicoです．前回の記事ではHugoを使ってブログをつくった話をやりました．今回はこのブログの運用方法について，ホスティング方法を交えて紹介していこうと思います．
+技術 Amazon Lightsail: AWSのVPSサービス．安い！！！とにかく安い！！！
+Docker: ブログページと配信サーバを一つのDockerイメージにしている．
+Caddy: Go製のwebサーバ．機能が豊富で，自動でhttps化してくれる．
+構成 このブログは僕のホームページをホスティングしているVPSと同じインスタンスを使用しています．構成は以下のようにしています．
+単一インスタンスにDockerをインストールしてホームページとブログはコンテナとして動かし，Caddyがドメインに応じてサービスを公開しているポートにプロキシするようにしています．プロキシするCaddyをコンテナとして動かしていないのは，僕の好みです．
+プロキシするためのCaddyの設定Caddyfileは以下のような感じです．
+hoge.example {  reverse_proxy :8000 } blog.hoge.example {  reverse_proxy :9000 } これだけの設定でドメインに応じてプロキシし，80，443ポートで待ち受けてくれるので非常に簡単です．
+投稿する流れ  手元のPCで記事を執筆する Hugoを使ってビルドする ビルドしたファイルごとGitHubにプッシュする GitHub Actionsを使って，Dockerイメージのビルドを行う（このときブログページをコンテナにコピーしている） ビルドしたイメージをGitHub Container Registryにプッシュする VPSにSSHして最新のコンテナイメージをpullしてコンテナを起動すれば，投稿完了  ちなみにブログのDockerイメージの元になるDockerfileはこんな感じです．
+FROMcaddy:2.4.6-alpineCOPY Caddyfile /etc/caddy/CaddyfileCOPY public/ /blog/publicVolumecaddy_data:/dataブログの配信にもCaddyを使っていて，公式のDockerイメージが配布されています．
+VPSにSSHして最新のイメージpullするの面倒じゃね？ 上記の5の後に，GitHub ActionsからVPSにSSHしてコマンド実行するみたいなことをやりたい．Ansibleとか使えないか気になっている．これやれば，GitHubにpushするだけで，ブログ投稿が可能になる
+参考  Caddy Document VirtualHostをお手軽に実現できるDockerコンテナnginx-proxyの起動方法  "/>
+
+    <meta property="og:title" content="devocのブログを支える技術 with Caddy" />
+<meta property="og:description" content="こんにちは．入社してからあるであろう健康診断のために付け焼き刃の努力で運動しているkumicoです．前回の記事ではHugoを使ってブログをつくった話をやりました．今回はこのブログの運用方法について，ホスティング方法を交えて紹介していこうと思います．
+技術 Amazon Lightsail: AWSのVPSサービス．安い！！！とにかく安い！！！
+Docker: ブログページと配信サーバを一つのDockerイメージにしている．
+Caddy: Go製のwebサーバ．機能が豊富で，自動でhttps化してくれる．
+構成 このブログは僕のホームページをホスティングしているVPSと同じインスタンスを使用しています．構成は以下のようにしています．
+単一インスタンスにDockerをインストールしてホームページとブログはコンテナとして動かし，Caddyがドメインに応じてサービスを公開しているポートにプロキシするようにしています．プロキシするCaddyをコンテナとして動かしていないのは，僕の好みです．
+プロキシするためのCaddyの設定Caddyfileは以下のような感じです．
+hoge.example {  reverse_proxy :8000 } blog.hoge.example {  reverse_proxy :9000 } これだけの設定でドメインに応じてプロキシし，80，443ポートで待ち受けてくれるので非常に簡単です．
+投稿する流れ  手元のPCで記事を執筆する Hugoを使ってビルドする ビルドしたファイルごとGitHubにプッシュする GitHub Actionsを使って，Dockerイメージのビルドを行う（このときブログページをコンテナにコピーしている） ビルドしたイメージをGitHub Container Registryにプッシュする VPSにSSHして最新のコンテナイメージをpullしてコンテナを起動すれば，投稿完了  ちなみにブログのDockerイメージの元になるDockerfileはこんな感じです．
+FROMcaddy:2.4.6-alpineCOPY Caddyfile /etc/caddy/CaddyfileCOPY public/ /blog/publicVolumecaddy_data:/dataブログの配信にもCaddyを使っていて，公式のDockerイメージが配布されています．
+VPSにSSHして最新のイメージpullするの面倒じゃね？ 上記の5の後に，GitHub ActionsからVPSにSSHしてコマンド実行するみたいなことをやりたい．Ansibleとか使えないか気になっている．これやれば，GitHubにpushするだけで，ブログ投稿が可能になる
+参考  Caddy Document VirtualHostをお手軽に実現できるDockerコンテナnginx-proxyの起動方法  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2022/03-24/" /><meta property="article:section" content="2022" />
+<meta property="article:published_time" content="2022-03-24T16:08:40+09:00" />
+<meta property="article:modified_time" content="2022-03-24T16:08:40+09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href=""><img class="app-header-avatar" src="/myicon-hooded.PNG" alt="devoc" /></a>
+      <h1>devocのブログ</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">ホーム</a>
+             - 
+          
+          <a class="app-header-menu-item" href="/tags/">タグ</a>
+      </nav>
+      <p>エンジニアですが，技術ブログだけでなく，趣味やお気持ち表明も投稿していきます</p>
+      <div class="app-header-social">
+        
+          <a href="https://twitter.com/devoc_" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>Twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg>
+          </a>
+        
+          <a href="https://github.com/devoc09" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+          <a href="https://devoc.ninja" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-link">
+  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">devocのブログを支える技術 with Caddy</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 24, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="/tags/%E6%8A%80%E8%A1%93/">技術</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>こんにちは．入社してからあるであろう健康診断のために付け焼き刃の努力で運動している<a href="https://twitter.com/devoc_">kumico</a>です．<a href="https://blog.devoc.ninja/2022/03-04-2/">前回の記事</a>ではHugoを使ってブログをつくった話をやりました．今回はこのブログの運用方法について，ホスティング方法を交えて紹介していこうと思います．</p>
+<h3 id="技術">技術</h3>
+<p>Amazon Lightsail: AWSのVPSサービス．安い！！！とにかく安い！！！</p>
+<p>Docker: ブログページと配信サーバを一つのDockerイメージにしている．</p>
+<p><a href="https://caddyserver.com/">Caddy</a>: Go製のwebサーバ．機能が豊富で，自動でhttps化してくれる．</p>
+<h3 id="構成">構成</h3>
+<p>このブログは僕のホームページをホスティングしているVPSと同じインスタンスを使用しています．構成は以下のようにしています．</p>
+<p><img src="/homepage-blog-conf.PNG" alt="ホームページとブログの構成"></p>
+<p>単一インスタンスにDockerをインストールしてホームページとブログはコンテナとして動かし，Caddyがドメインに応じてサービスを公開しているポートにプロキシするようにしています．プロキシするCaddyをコンテナとして動かしていないのは，僕の好みです．</p>
+<p>プロキシするためのCaddyの設定<code>Caddyfile</code>は以下のような感じです．</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Caddyfile" data-lang="Caddyfile"><span style="display:flex;"><span>hoge.example {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">reverse_proxy</span> <span style="color:#e6db74">:8000</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>blog.hoge.example {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">reverse_proxy</span> <span style="color:#e6db74">:9000</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>これだけの設定でドメインに応じてプロキシし，80，443ポートで待ち受けてくれるので非常に簡単です．</p>
+<h3 id="投稿する流れ">投稿する流れ</h3>
+<ol>
+<li>手元のPCで記事を執筆する</li>
+<li>Hugoを使ってビルドする</li>
+<li>ビルドしたファイルごとGitHubにプッシュする</li>
+<li>GitHub Actionsを使って，Dockerイメージのビルドを行う（このときブログページをコンテナにコピーしている）</li>
+<li>ビルドしたイメージをGitHub Container Registryにプッシュする</li>
+<li>VPSにSSHして最新のコンテナイメージをpullしてコンテナを起動すれば，投稿完了</li>
+</ol>
+<p>ちなみにブログのDockerイメージの元になるDockerfileはこんな感じです．</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> caddy:2.4.6-alpine</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> Caddyfile /etc/caddy/Caddyfile<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> public/ /blog/public<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">Volume</span><span style="color:#e6db74"> caddy_data:/data</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>ブログの配信にもCaddyを使っていて，<a href="https://hub.docker.com/_/caddy?tab=description">公式のDockerイメージ</a>が配布されています．</p>
+<h3 id="vpsにsshして最新のイメージpullするの面倒じゃね">VPSにSSHして最新のイメージpullするの面倒じゃね？</h3>
+<p>上記の5の後に，GitHub ActionsからVPSにSSHしてコマンド実行するみたいなことをやりたい．Ansibleとか使えないか気になっている．これやれば，GitHubにpushするだけで，ブログ投稿が可能になる</p>
+<h3 id="参考">参考</h3>
+<ol>
+<li><a href="https://caddyserver.com/docs/">Caddy Document</a></li>
+<li><a href="https://suin.io/531">VirtualHostをお手軽に実現できるDockerコンテナnginx-proxyの起動方法</a></li>
+</ol>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
