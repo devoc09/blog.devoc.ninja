@@ -5,6 +5,11 @@ theme = "m10c"
 paginate = 8
 staticDir = ["static/images"]
 
+[markup]
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true
+
 [menu]
     [[menu.main]]
         identifier = "home"
