@@ -2,5 +2,5 @@
 devoc.ninja
 
 [lightsail:vars]
-ansible_root-22
+ansible_root=22
 ansible_user=ubuntu
