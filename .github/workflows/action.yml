@@ -67,5 +67,5 @@ jobs:
           ssh-add ~/.ssh/id_rsa
 
       - name: execute ansible playbook
-        run: ansible-playbook -i ./ansible/inventory ./ansible/playbook.yml
+        run: ansible-playbook -i ./inventory ./playbook.yml
         working-directory: ./ansible
