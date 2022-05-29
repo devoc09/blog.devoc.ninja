@@ -58,7 +58,7 @@ jobs:
       - name: setup ssh config
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.LIGHTSAIL_PRIVATE }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.LIGHTSAIL_PRIVATE }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 400 ~/.ssh/id_rsa
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/id_rsa
