@@ -56,13 +56,15 @@ jobs:
         run: sudo apt install -y ansible
 
       - name: setup ssh config
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.LIGHTSAIL_PRIVATE }}" | tr -d '\r' > ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
-          eval $(ssh-agent -s)
+          ssh-keyscan devoc.ninja >> ~/.ssh/known_hosts
+          echo "${{ secrets.LIGHTSAIL_PRIVATE }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add ~/.ssh/id_rsa
-          ssh-keyscan -p 22 -H "devoc.ninja" >> ~/.ssh/known_hosts
-          ssh-keygen -R devoc.ninja
+
       - name: execute ansible playbook
-        run: ansible-playbook -i ./ansible/inventory ./ansible/playbook.yml --private-key ~/.ssh/id_rsa
+        run: ansible-playbook -i ./ansible/inventory ./ansible/playbook.yml

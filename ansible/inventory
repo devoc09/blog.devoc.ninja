@@ -4,3 +4,4 @@ devoc.ninja
 [lightsail:vars]
 ansible_root=22
 ansible_user=ubuntu
+ansible_ssh_private_key_file=~/.ssh/id_rsa
