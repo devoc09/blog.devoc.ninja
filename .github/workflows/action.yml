@@ -65,6 +65,8 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add ~/.ssh/id_rsa
+          ansible-playbook -i ./inventory ./playbook.yml
+        working-directory: ./ansible
 
       - name: execute ansible playbook
         run: ansible-playbook -i ./inventory ./playbook.yml
