@@ -68,3 +68,4 @@ jobs:
 
       - name: execute ansible playbook
         run: ansible-playbook -i ./ansible/inventory ./ansible/playbook.yml
+        working-directory: ./ansible
