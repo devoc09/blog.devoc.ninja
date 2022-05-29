@@ -1,0 +1,12 @@
+- hosts: lightsail
+  tasks:
+    - name: Kill container process
+      command: sudo docker kill blog.devoc.ninja
+    - name: Remove container
+      command: sudo docker rm blog.devoc.ninja
+    - name: Pull container image
+      command: sudo docker pull ghcr.io/devoc09/blog.devoc.ninja:main
+    - name: Run container
+      command: sudo docker run --name blog.devoc.ninja -d -p 9000:9000 ghcr.io/devoc09/blog.devoc.ninja:main
+    - name: Prune docker image
+      command: sudo docker image prune -f
