@@ -6,7 +6,21 @@
     <description>Recent content on devocのブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 May 2022 00:48:43 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Jun 2022 16:49:21 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ansibleを用いてこのブログのデプロイを自動化した</title>
+      <link>/2022/06-11/</link>
+      <pubDate>Fri, 10 Jun 2022 16:49:21 +0900</pubDate>
+      
+      <guid>/2022/06-11/</guid>
+      <description>こんにちは。最近になって、約２ヶ月取り組んでいるダイエットの効果がでてきて、俄然やる気が出てきているkumicoです。この記事は、ブログのデプロイをAnsibleで自動化した話について書いています。
+このブログについて このブログは、devocのブログを支える技術 with Caddyという記事で紹介したように、VPS上にDockerを立てて、ブログのページと配信サーバをコンテナとして動かしています。
+新たに記事を投稿するときは、以下のような手順を行なっていました。
+ 手元のPCで記事を執筆する Hugoを使ってビルドする ビルドしたファイルごとGitHubにプッシュする GitHub Actionsを使って，Dockerイメージのビルドを行う（このときブログページをコンテナにコピーしている） ビルドしたイメージをGitHub Container Registryにプッシュする VPSにSSHして最新のコンテナイメージをpullしてコンテナを起動すれば，投稿完了 &amp;lt;&amp;mdash; デプロイするたびに、VPSにsshして最新のコンテナイメージをプルして、動いてるコンテナをkillしてからプルしてきたイメージを使ってコンテナを立て直さないといけない。  今回は6のところをGitHub ActionsからAnsibleを使うことで、自動化しました。
+ワークフロー 以下のようなワークフローを作成しました。
+ deploy: needs: push runs-on: ubuntu-latest steps: - uses: actions/checkout@v2 - name: Install Ansible run: sudo apt install -y ansible //ランナーにAnsibleをインストール - name: setup ssh config env: SSH_AUTH_SOCK: /tmp/ssh_agent.sock run: | mkdir -p ~/.ssh ssh-keyscan &amp;#34;ssh先のドメイン名&amp;#34; &amp;gt;&amp;gt; ~/.ssh/known_hosts //これをいれとかないと、インタラクティブな処理が入る echo &amp;#34;${{ secrets.LIGHTSAIL_PRIVATE }}&amp;#34; &amp;gt; ~/.ssh/id_rsa //リポジトリに登録した秘密鍵をActionsのランナーに登録 chmod 600 ~/.</description>
+    </item>
+    
     <item>
       <title>2022年4,5月に食べたラーメン</title>
       <link>/2022/05-30/</link>
