@@ -6,7 +6,17 @@
     <description>Recent content on devocのブログ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Jun 2022 16:49:21 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Jul 2022 14:40:08 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2022年6月に食べたラーメン</title>
+      <link>/2022/07-09/</link>
+      <pubDate>Sat, 09 Jul 2022 14:40:08 +0900</pubDate>
+      
+      <guid>/2022/07-09/</guid>
+      <description>こんにちは。6月は雨が降ったり、暑かったりしてほとんどラーメンを食べに外に行くことありませんでした。そのおかげか、4月から続けているダイエットの効果がグッと出て、少し前に目標体重の60kgを下回ることができました。このまま体重をキープしつつ、美味しいラーメンを食べていきたいですね
+丼頭  長岡生姜ラーメン しょうがの湯 黒豚ちらし生姜ラーメン    らーめん花楽 上溝店 黒醤油ラーメン   参考  </description>
+    </item>
+    
     <item>
       <title>Ansibleを用いてこのブログのデプロイを自動化した</title>
       <link>/2022/06-11/</link>
