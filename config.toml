@@ -3,7 +3,7 @@ languageCode = 'en-us'
 title = 'devocのブログ'
 theme = "m10c"
 paginate = 8
-staticDir = ["static/images"]
+staticDir = ["static/images", "static/images/2022"]
 
 [markup]
     [markup.goldmark]
