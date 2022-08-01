@@ -44,6 +44,8 @@ staticDir = ["static/images", "static/images/2022"]
 [params.style]
     darkestColor = "#262829"
     darkColor = "#1b1d1e"
-    lightColor = "#afbac4"
-    lightestColor = "#f8f8f2"
+    # lightColor = "#afbac4"
+    lightColor = "#f0f8ff"
+    # lightestColor = "#f8f8f2"
+    lightestColor = "#f5f5dc"
     primaryColor = "#e48c22"
