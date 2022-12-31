@@ -23,8 +23,9 @@ staticDir = ["static/images", "static/images/2022"]
         weight = 2
 
 [params]
+    OBJCT_URL = "https://pub-41b0c551595f4718a77aa525117fc030.r2.dev/"
     author = "devoc"
-    avatar = "myicon-hooded.PNG"
+    avatar = "https://pub-41b0c551595f4718a77aa525117fc030.r2.dev/myicon-hooded.PNG"
     description = "エンジニアですが，技術ブログだけでなく，趣味やお気持ち表明も投稿していきます"
     favicon = "myicon-hooded.PNG"
     images = "https://pbs.twimg.com/profile_images/1351413992799969281/Dn-qlLWJ_400x400.jpg"
