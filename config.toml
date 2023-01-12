@@ -40,7 +40,7 @@ staticDir = ["static/images", "static/images/2022"]
     [[params.social]]
         icon = "site"
         name = "devoc's site"
-        url = "https://devoc.ninja"
+        url = "https://www.devoc.ninja"
 [params.style]
     darkestColor = "#262829"
     darkColor = "#1b1d1e"
