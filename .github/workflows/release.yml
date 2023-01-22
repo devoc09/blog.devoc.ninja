@@ -12,16 +12,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 0
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.93.1'
       - name: Build
-        run: hugo
+        run: hugo --minify
       - name: Upload
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@2.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: blog-devoc-ninja
-          directory: ./public
+          preCommands: echo "*** publish articles ***"
+          command: pages publish ./public --project-name=blog-devoc-ninja --branch=release
+          postCommands: echo "*** published success! ***"
