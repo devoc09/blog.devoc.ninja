@@ -4,6 +4,10 @@ title = 'devocのブログ'
 theme = "m10c"
 paginate = 8
 staticDir = ["static/images"]
+enableGitInfo = true
+
+[frontmatter]
+lastmod = [":git", "lastmod"]
 
 [markup]
     [markup.goldmark]
