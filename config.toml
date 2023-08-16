@@ -28,7 +28,7 @@ lastmod = [":git", "lastmod"]
 
 [params]
     author = "devoc"
-    avatar = "https://pub-41b0c551595f4718a77aa525117fc030.r2.dev/my-icon2.png"
+    avatar = "my-icon2.webp"
     description = "Powered by Hugo"
     favicon = "https://pub-41b0c551595f4718a77aa525117fc030.r2.dev/favicon.png"
     images = "https://pub-41b0c551595f4718a77aa525117fc030.r2.dev/my-icon2.png"
