@@ -34,8 +34,8 @@ lastmod = [":git", "lastmod"]
     images = "https://pub-41b0c551595f4718a77aa525117fc030.r2.dev/my-icon2.png"
     
     [[params.social]]
-        icon = "x"
-        name = "x"
+        icon = "twitter"
+        name = "Twitter"
         url = "https://twitter.com/devoc_"
     [[params.social]]
         icon = "github"
