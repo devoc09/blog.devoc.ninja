@@ -27,5 +27,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           preCommands: echo "*** publish articles ***"
-          command: pages deploy ./public --project-name=blog-devoc-ninja --branch=release
+          command: pages deploy ./public --project-name=blog-devoc-ninja --branch=release --commit-dirty=true
           postCommands: echo "*** published success! ***"
